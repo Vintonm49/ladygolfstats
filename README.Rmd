@@ -1,0 +1,37 @@
+---
+title: "ladygolfstats Package"
+author: "Melanie Vinton"
+date: "12/21/2017"
+output: html_document
+---
+
+I enjoy watching and playing golf, and following professional player statistics.  The Ladies Professional Golf Association (LPGA) provides statistics for players on the LPGA tour on their website at www.lpga.com.  This package is designed to pull the tables of statistics from that website and organize that information for analysis.
+
+<br>
+
+The following script is a workflow for getting a dataframe and CSV file for the statistics for a given year by player name.  In this case it collects for the year 2015.  It also provides the individual dataframes for each of the statistics.
+
+```{r eval = FALSE}
+links <- lpga_getlinks(year = 2015)
+stats <- lpga_scrape(links = links)
+stat_names <- stat_names(links = links, year = 2015)
+
+# extract the dataframes from the list
+# assign stat name to name of df
+for (i in seq(stats)){
+  dfname <- stat_names[i]
+  assign(dfname, stats[[i]])
+}
+rolex_player_of_the_year <- rolex_clean()
+
+mylist <- clean_ladygolf()
+list2env(mylist ,.GlobalEnv)
+
+stats_byname_2015 <- stats_join()
+stats_byname_2015 <- clean_joined_stats(df = stats_byname)
+
+write.csv(stats_byname_2015, "lpgastats_2015.csv", row.names = FALSE)
+
+```
+
+
