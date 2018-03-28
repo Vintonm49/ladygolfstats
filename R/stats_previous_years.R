@@ -158,7 +158,7 @@ stats_join <- function(){
 #'@param df  Dataframe.  Created using the stats_join() function.
 #'@export
 #'
-fix_clean_joined_stats <- function(df = NULL){
+clean_joined_stats <- function(df = NULL){
   stats_byname <- df
   # Wins.y has a number for all 209 players so remove Wins.x
   #stats_byname$Wins.x <- NULL
